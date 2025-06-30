@@ -1,0 +1,97 @@
+@use "../config/variables" as *;
+@use "../config/mixins" as *;
+
+/* Set box-sizing to border-box for all elements */
+html {
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+body {
+	overflow-x: hidden !important;
+	max-width: 100vw;
+	width: 100vw;
+	font-family: $font-primary, sans-serif;
+}
+
+// #wpadminbar {
+// 	display: none !important;
+// }
+
+.container {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 20px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/* Optional: Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+	.container {
+		padding: 0 15px;
+	}
+}
+
+@media (max-width: 480px) {
+	.container {
+		padding: 0 10px;
+	}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 5rem;
+	line-height: 1.2;
+	font-weight: 400;
+	word-wrap: break-word;
+}
+h2 {
+	font-size: 3rem;
+	line-height: 1.3;
+	font-weight: 400;
+	word-wrap: break-word;
+}
+h3 {
+	font-size: 2rem;
+	line-height: 1.4;
+	font-weight: 400;
+	word-wrap: break-word;
+}
+h4 {
+	font-size: 1.5rem;
+	line-height: 1.5;
+	font-weight: 400;
+	word-wrap: break-word;
+}
+h5 {
+	font-size: 1.25rem;
+	line-height: 1.6;
+	font-weight: 400;
+	word-wrap: break-word;
+}
+h6 {
+	font-size: 1rem;
+	line-height: 1.7;
+	font-weight: 400;
+	word-wrap: break-word;
+}
+p {
+	margin: 0;
+	padding: 0;
+}

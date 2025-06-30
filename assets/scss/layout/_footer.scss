@@ -1,0 +1,193 @@
+@use "../config/variables" as *;
+@use "../config/mixins" as *;
+// Variables
+
+// Mixins
+@mixin flex-center {
+	display: flex;
+	align-items: center;
+}
+
+@mixin flex-between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+// Main Footer Styles
+.footer {
+	background-color: $blue;
+	color: $white;
+	padding: 60px 0 30px;
+	font-family: "Arial", sans-serif;
+
+	&__container {
+		max-width: $container-max-width;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+
+	&__content {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		gap: 60px;
+		align-items: center;
+		margin-bottom: 40px;
+
+		@media (max-width: 968px) {
+			grid-template-columns: 1fr;
+			gap: 40px;
+			text-align: center;
+		}
+	}
+
+	&__logo {
+	}
+
+	&__main {
+		@media (max-width: 968px) {
+			order: -1;
+		}
+	}
+
+	&__title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		line-height: 1.1;
+		margin: 0 0 30px 0;
+		letter-spacing: 1px;
+
+		@media (max-width: 768px) {
+			font-size: 2rem;
+		}
+
+		@media (max-width: 480px) {
+			font-size: 1.6rem;
+			margin-bottom: 20px;
+		}
+	}
+
+	&__cta-button {
+		background-color: $white;
+		color: $blue;
+		border: none;
+		padding: 15px 35px;
+		border-radius: 25px;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+
+		&:hover {
+			background-color: $light-gray;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+		}
+
+		&:active {
+			transform: translateY(0);
+		}
+
+		@media (max-width: 480px) {
+			padding: 12px 30px;
+			font-size: 0.9rem;
+		}
+	}
+
+	&__contact {
+		display: flex;
+		flex-direction: row;
+		gap: 30px;
+
+		@media (max-width: 968px) {
+			flex-direction: row;
+			justify-content: center;
+			gap: 60px;
+		}
+
+		@media (max-width: 600px) {
+			flex-direction: column;
+			gap: 30px;
+		}
+	}
+
+	&__office {
+		&:not(:last-child) {
+			margin-bottom: 20px;
+		}
+	}
+
+	&__office-title {
+		font-size: 1.1rem;
+		font-weight: 700;
+		margin: 0 0 10px 0;
+		color: $white;
+	}
+
+	&__address {
+		font-style: normal;
+		line-height: 1.6;
+		font-size: 0.95rem;
+		color: rgba(255, 255, 255, 0.9);
+		margin: 0;
+	}
+
+	&__bottom {
+		@include flex-between;
+		padding-top: 30px;
+		border-top: 1px solid green;
+		margin-top: 40px;
+
+		@media (max-width: 600px) {
+			flex-direction: column;
+			gap: 15px;
+			text-align: center;
+		}
+	}
+
+	&__copyright {
+		p {
+			margin: 0;
+			font-size: 0.85rem;
+			color: rgba(255, 255, 255, 0.7);
+			letter-spacing: 0.5px;
+		}
+	}
+
+	&__legal {
+		@include flex-center;
+		gap: 15px;
+	}
+
+	&__legal-link {
+		color: rgba(255, 255, 255, 0.8);
+		text-decoration: none;
+		font-size: 0.85rem;
+		transition: color 0.3s ease;
+
+		&:hover {
+			color: $white;
+			text-decoration: underline;
+		}
+	}
+
+	&__separator {
+		color: rgba(255, 255, 255, 0.4);
+		font-size: 0.8rem;
+	}
+}
+
+// Responsive Design
+@media (max-width: 480px) {
+	.footer {
+		padding: 40px 0 20px;
+
+		&__container {
+			padding: 0 15px;
+		}
+
+		&__content {
+			gap: 30px;
+		}
+	}
+}

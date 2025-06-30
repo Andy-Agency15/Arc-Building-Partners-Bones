@@ -1,0 +1,489 @@
+@use "../config/variables" as *;
+@use "../config/mixins" as *;
+
+.main {
+	position: relative;
+	display: block;
+}
+
+// Typography helpers
+sup,
+sub {
+	font-size: calc(0.5em + 4px);
+	vertical-align: baseline;
+	position: relative;
+	top: calc(-0.5 * 0.83 * 2 * (1em - 4px));
+}
+
+sub {
+	top: calc(0.25 * 0.83 * 2 * (1em - 4px));
+}
+
+// Control Panel System
+.control-panel {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100dvh;
+	z-index: 1000;
+	padding: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	width: 40%;
+	max-width: 400px;
+	border-inline: 1px solid red;
+}
+
+#control-panel-spacer-a {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100dvh;
+	z-index: 10;
+	background: linear-gradient(
+		90deg,
+		rgba(0, 62, 117, 1) 0%,
+		rgba(0, 30, 80, 0) 100%
+	);
+	width: 40%;
+	max-width: 400px;
+	border-inline: 1px solid red;
+}
+
+// View Toggle
+.view-toggle {
+	display: flex;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 25px;
+	padding: 5px;
+
+	button {
+		padding: 10px 20px;
+		border: none;
+		background: none;
+		color: #fff;
+		cursor: pointer;
+		border-radius: 20px;
+		transition: all 0.3s ease;
+		font-size: 14px;
+
+		&.active {
+			background: #fff;
+			color: #000;
+		}
+	}
+}
+
+// Filter System
+.filters {
+	gap: 30px;
+	align-items: center;
+}
+
+.filter-group {
+	margin-bottom: 15px;
+}
+
+.filter-dropdown {
+	position: relative;
+
+	.dropdown-trigger {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 12px 20px;
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		background: rgba(255, 255, 255, 0.05);
+		color: #fff;
+		cursor: pointer;
+		border-radius: 8px;
+		transition: all 0.3s ease;
+		min-width: 140px;
+		position: relative;
+
+		&:hover {
+			border-color: rgba(255, 255, 255, 0.6);
+			background: rgba(255, 255, 255, 0.1);
+		}
+
+		&.open {
+			border-color: #fff;
+			background: rgba(255, 255, 255, 0.1);
+
+			.dropdown-arrow {
+				transform: translateY(-50%) rotate(180deg);
+			}
+		}
+
+		.filter-label {
+			font-size: 10px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			opacity: 0.7;
+			margin-bottom: 2px;
+		}
+
+		.selected-value {
+			font-size: 14px;
+			font-weight: 500;
+		}
+
+		.dropdown-arrow {
+			position: absolute;
+			right: 12px;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 10px;
+			transition: transform 0.3s ease;
+		}
+	}
+
+	.dropdown-menu {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		background: rgba(0, 0, 0, 0.95);
+		backdrop-filter: blur(20px);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 8px;
+		margin-top: 5px;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-10px);
+		transition: all 0.3s ease;
+		z-index: 1001;
+		max-height: 250px;
+		overflow-y: auto;
+
+		&.open {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+		}
+
+		.dropdown-item {
+			padding: 12px 20px;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			font-size: 14px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			&:hover {
+				background: rgba(255, 255, 255, 0.1);
+			}
+
+			&.active {
+				background: rgba(255, 255, 255, 0.2);
+				color: #fff;
+				font-weight: 500;
+			}
+		}
+	}
+}
+
+// Project List
+.project-list-dropdown {
+	width: 400px;
+	max-width: 90vw;
+	background: rgba(0, 0, 0, 0.95);
+	backdrop-filter: blur(20px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 15px;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: all 0.3s ease;
+	z-index: 1002;
+	max-height: 400px;
+	overflow-y: auto;
+
+	&.open {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+	.project-list-header {
+		padding: 20px 20px 10px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		font-size: 14px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		opacity: 0.8;
+	}
+
+	.project-list-items {
+		padding: 10px 0;
+	}
+
+	.project-list-item {
+		display: block;
+		padding: 15px 20px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		transition: all 0.2s ease;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.1);
+		}
+
+		&.active {
+			background: rgba(255, 255, 255, 0.15);
+			border-left: 3px solid #fff;
+		}
+
+		.project-link {
+			color: #fff;
+			text-decoration: none;
+			font-size: 14px;
+			font-weight: 500;
+			display: block;
+			transition: all 0.2s ease;
+
+			&:hover {
+				color: #fff;
+				opacity: 0.8;
+			}
+		}
+	}
+
+	.project-list-empty {
+		padding: 40px 20px;
+		text-align: center;
+		opacity: 0.6;
+		font-style: italic;
+	}
+}
+
+// Main Content
+.main-content {
+	position: relative;
+}
+
+// View A - Slideshow
+.view-a {
+	position: relative;
+	height: 100dvh;
+	overflow: hidden;
+
+	.slideshow-container {
+		position: relative;
+		width: 100vw;
+		height: 100dvh;
+	}
+
+	.slide {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		transition: opacity 0.8s ease-in-out;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+
+		&.active {
+			opacity: 1;
+		}
+
+		&.hidden {
+			opacity: 0;
+			transform: scale(0.8);
+			pointer-events: none;
+		}
+	}
+
+	.slide-overlay {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 60px 40px 40px;
+		z-index: 1100;
+	}
+
+	.slide-content {
+		h2 {
+			font-size: 3rem;
+			margin-bottom: 10px;
+			font-weight: 300;
+		}
+
+		.meta {
+			display: flex;
+			gap: 20px;
+			opacity: 0.8;
+			font-size: 14px;
+		}
+
+		.service,
+		.sector {
+			padding: 5px 15px;
+			background: rgba(255, 255, 255, 0.2);
+			border-radius: 15px;
+			font-size: 12px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+	}
+
+	.carousel-nav {
+		position: absolute;
+		bottom: 30px;
+		right: 60px;
+		display: flex;
+		gap: 15px;
+		z-index: 110;
+
+		.carousel-thumb {
+			width: 80px;
+			height: 60px;
+			background-size: cover;
+			background-position: center;
+			cursor: pointer;
+			border: 2px solid transparent;
+			transition: all 0.3s ease;
+			border-radius: 8px;
+			opacity: 0.6;
+
+			&.active {
+				border-color: #fff;
+				opacity: 1;
+				transform: scale(1.1);
+			}
+		}
+	}
+}
+
+// View B - Grid
+.view-b {
+	display: none;
+	padding: 40px;
+	min-height: 100dvh;
+
+	.grid-container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30px;
+	}
+
+	.project-card {
+		aspect-ratio: 4/3;
+		background-size: cover;
+		background-position: center;
+		border-radius: 15px;
+		overflow: hidden;
+		position: relative;
+		cursor: pointer;
+		transition: all 0.4s ease;
+
+		&:hover {
+			transform: scale(1.02);
+		}
+
+		&.hidden {
+			opacity: 0;
+			transform: scale(0.8);
+			pointer-events: none;
+		}
+	}
+
+	.card-overlay {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+		padding: 30px 25px 25px;
+	}
+
+	.card-content {
+		h3 {
+			font-size: 1.5rem;
+			margin-bottom: 10px;
+			font-weight: 300;
+		}
+
+		.meta {
+			display: flex;
+			gap: 15px;
+			font-size: 12px;
+		}
+
+		.service,
+		.sector {
+			padding: 4px 12px;
+			background: rgba(255, 255, 255, 0.2);
+			border-radius: 12px;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+		}
+	}
+}
+
+// Utility Classes
+.view-transition {
+	transition: all 0.5s ease;
+}
+
+.split .site-footer {
+	display: none;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+	.controls-container {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 15px;
+	}
+
+	.filters {
+		flex-direction: column;
+		gap: 15px;
+
+		.filter-group {
+			align-items: center;
+		}
+	}
+
+	.view-b .projects-grid {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+
+	.view-a {
+		.slide-content h2 {
+			font-size: 2rem;
+		}
+
+		.carousel-nav {
+			flex-wrap: wrap;
+			max-width: 90%;
+
+			.carousel-thumb {
+				width: 60px;
+				height: 45px;
+			}
+		}
+	}
+
+	.main-content {
+		margin-top: 180px;
+	}
+}

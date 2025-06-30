@@ -1,0 +1,139 @@
+@use "../config/variables" as *;
+
+// Base font loading
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/Poppins/Poppins-Medium.ttf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/Poppins/Poppins-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+// Extends for different text styles
+%heading-big {
+	// font-family: $font-primary;
+	// font-size: $heading-big-size;
+	// line-height: $heading-big-line-height;
+	// font-variation-settings: "slnt" #{$heading-big-slant},
+	// 	"wdth" #{$heading-big-width}, "wght" #{$heading-big-weight};
+	// margin-top: 0;
+	// margin-bottom: $spacing-sm;
+}
+
+%heading-medium {
+	// font-family: $font-primary;
+	// font-size: $heading-medium-size;
+	// line-height: $heading-medium-line-height;
+	// font-variation-settings: "slnt" #{$heading-medium-slant},
+	// 	"wdth" #{$heading-medium-width}, "wght" #{$heading-medium-weight};
+	// margin-top: 0;
+	// margin-bottom: $spacing-sm;
+}
+
+%heading-small {
+	// font-family: $font-primary;
+	// font-size: $heading-small-size;
+	// line-height: $heading-small-line-height;
+	// font-variation-settings: "slnt" #{$heading-small-slant},
+	// 	"wdth" #{$heading-small-width}, "wght" #{$heading-small-weight};
+	// margin-top: 0;
+	// margin-bottom: $spacing-xs;
+}
+
+%paragraph-text {
+	// font-family: $font-primary;
+	// font-size: $paragraph-size;
+	// line-height: $paragraph-line-height;
+	// font-variation-settings: "slnt" #{$paragraph-slant},
+	// 	"wdth" #{$paragraph-width}, "wght" #{$paragraph-weight};
+	// margin-bottom: $spacing-sm;
+}
+
+// .page-template-home-template-php {
+// 	// Apply extends to HTML elements
+// 	h1 {
+// 		@extend %heading-big;
+// 	}
+
+// 	h2 {
+// 		@extend %heading-medium;
+// 	}
+
+// 	h3,
+// 	h4 {
+// 		@extend %heading-small;
+// 	}
+
+// 	h5,
+// 	h6 {
+// 		@extend %heading-small;
+// 		font-size: 1.1rem; // Slightly smaller
+// 	}
+
+// 	p {
+// 		@extend %paragraph-text;
+// 	}
+
+// 	// Special typography classes you can use in templates
+// 	.hero-title {
+// 		@extend %heading-big;
+// 		font-size: 4rem; // Override for hero
+// 		font-variation-settings: "slnt" #{$heading-big-slant}, "wdth" 115,
+// 			// Wider for impact
+// 			"wght" 800; // Heavier for impact
+
+// 		@media (max-width: 768px) {
+// 			font-size: 2.5rem;
+// 		}
+// 	}
+
+// 	.section-title {
+// 		@extend %heading-medium;
+// 	}
+
+// 	.card-title {
+// 		@extend %heading-small;
+// 	}
+
+// 	.lead-text {
+// 		@extend %paragraph-text;
+// 		font-size: 1.125rem; // Slightly larger
+// 		font-variation-settings: "slnt" #{$paragraph-slant},
+// 			"wdth" #{$paragraph-width}, "wght" 450; // Slightly heavier
+// 	}
+
+// 	.small-text {
+// 		@extend %paragraph-text;
+// 		font-size: 0.875rem;
+// 		font-variation-settings: "slnt" #{$paragraph-slant}, "wdth" 95,
+// 			// Slightly condensed
+// 			"wght" #{$paragraph-weight};
+// 	}
+
+// 	// Button text styling
+// 	.btn-text {
+// 		font-family: $font-primary;
+// 		font-size: 1rem;
+// 		font-variation-settings: "slnt" 0, "wdth" 105,
+// 			// Slightly expanded
+// 			"wght" 500; // Medium weight
+// 		text-transform: none;
+// 		letter-spacing: 0.025em;
+// 	}
+// }

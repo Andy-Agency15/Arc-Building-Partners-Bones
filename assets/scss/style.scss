@@ -1,0 +1,45 @@
+// Main SCSS file that imports all partials
+
+// 1. Configuration & Variables
+@use "config/variables" as *;
+@use "config/mixins" as *;
+@use "config/functions" as *;
+
+// 2. Vendors & External Libraries
+@use "vendors/normalize";
+
+// 3. Base Styles
+@use "base/reset";
+@use "base/typography";
+@use "base/constants";
+@use "base/forms";
+
+// 4. Layout
+@use "layout/header";
+@use "layout/footer";
+@use "layout/sidebar";
+@use "layout/navigation";
+
+// 5. Components
+@use "components/buttons";
+@use "components/cards";
+@use "components/modals";
+@use "components/pagination";
+
+// 6. Pages
+@use "pages/_home";
+@use "pages/_services";
+@use "pages/_about";
+@use "pages/_contact";
+@use "pages/_projects";
+@use "pages/_team";
+
+// 7. WordPress Specific
+@use "wordpress/gutenberg";
+@use "wordpress/widgets";
+@use "wordpress/comments";
+@use "wordpress/gravity-forms";
+
+// 8. Utilities
+@use "utilities/helpers";
+@use "utilities/responsive";

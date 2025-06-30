@@ -1,0 +1,68 @@
+/*
+Theme Name: Bones Theme
+Description: A clean, minimal WordPress starter theme with GSAP, ACF, and Gravity Forms integration.
+Author: Andy Brown
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.4
+Requires PHP: 8.0
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: bones
+Domain Path: /languages
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned.
+*/
+
+/* 
+=================================
+Basic CSS Reset & Variables
+=================================
+*/
+
+:root {
+    --primary-color: #007cba;
+    --secondary-color: #686868;
+    --accent-color: #e74c3c;
+    --text-color: #333;
+    --text-light: #666;
+    --background-color: #fff;
+    --border-color: #ddd;
+    --font-primary: 'Helvetica Neue', Arial, sans-serif;
+    --font-secondary: Georgia, serif;
+    --container-max-width: 1200px;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 4rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Animation classes for GSAP */
+.fade-in,
+.slide-in-left,
+.slide-in-right,
+.stagger-item {
+    opacity: 0;
+}

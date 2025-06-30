@@ -1,0 +1,15 @@
+@use "../config/variables" as *;
+@use "../config/mixins" as *;
+
+.site-header {
+	position: absolute;
+	width: 100%;
+
+	.logo {
+		height: 100px;
+
+		img {
+			height: 100%;
+		}
+	}
+}

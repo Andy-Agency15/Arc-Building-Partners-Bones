@@ -1,0 +1,221 @@
+// assets/scss/config/_mixins.scss
+// Updated to use modern Sass map functions
+
+@use "sass:map"; // Import the map module
+@use "variables" as *;
+
+// Fixed responsive mixin
+@mixin respond-to($breakpoint) {
+	@if map.has-key($breakpoints, $breakpoint) {
+		@media (min-width: map.get($breakpoints, $breakpoint)) {
+			@content;
+		}
+	} @else {
+		@warn "Breakpoint `#{$breakpoint}` not found in $breakpoints.";
+	}
+}
+
+// Additional responsive mixins for more flexibility
+@mixin respond-below($breakpoint) {
+	@if map.has-key($breakpoints, $breakpoint) {
+		@media (max-width: map.get($breakpoints, $breakpoint) - 1px) {
+			@content;
+		}
+	} @else {
+		@warn "Breakpoint `#{$breakpoint}` not found in $breakpoints.";
+	}
+}
+
+@mixin respond-between($min-breakpoint, $max-breakpoint) {
+	@if map.has-key($breakpoints, $min-breakpoint) and
+		map.has-key($breakpoints, $max-breakpoint)
+	{
+		@media (min-width: map.get($breakpoints, $min-breakpoint)) and (max-width: map.get($breakpoints, $max-breakpoint) - 1px) {
+			@content;
+		}
+	} @else {
+		@warn "One or both breakpoints not found in $breakpoints.";
+	}
+}
+
+// Existing mixins...
+@mixin flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin container {
+	max-width: $container-max-width;
+	margin: 0 auto;
+	padding: 0 $container-padding;
+}
+
+// Typography mixins for custom font variations
+@mixin custom-font($size, $weight, $width: 100, $slant: 0, $line-height: 1.4) {
+	font-family: $font-primary;
+	font-size: $size;
+	line-height: $line-height;
+	font-variation-settings: "slnt" #{$slant}, "wdth" #{$width},
+		"wght" #{$weight};
+}
+
+// Responsive typography mixin
+@mixin responsive-font(
+	$mobile-size,
+	$desktop-size,
+	$weight: 400,
+	$width: 100,
+	$slant: 0
+) {
+	@include custom-font($mobile-size, $weight, $width, $slant);
+
+	@include respond-to("md") {
+		font-size: $desktop-size;
+	}
+}
+
+// Button mixin updated
+@mixin button-style($bg-color: $primary-color, $text-color: white) {
+	display: inline-block;
+	padding: 12px 24px;
+	background-color: $bg-color;
+	color: $text-color;
+	text-decoration: none;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	// Apply button text styling
+	font-family: $font-primary;
+	font-variation-settings: "slnt" 0, "wdth" 105, "wght" 500;
+
+	&:hover {
+		background-color: darken($bg-color, 10%);
+		transform: translateY(-2px);
+	}
+}
+
+// Grid mixin
+@mixin grid($columns: 1, $gap: 1rem) {
+	display: grid;
+	grid-template-columns: repeat($columns, 1fr);
+	gap: $gap;
+}
+
+// Responsive grid mixin
+@mixin responsive-grid(
+	$mobile-cols: 1,
+	$tablet-cols: 2,
+	$desktop-cols: 3,
+	$gap: 1rem
+) {
+	@include grid($mobile-cols, $gap);
+
+	@include respond-to("sm") {
+		grid-template-columns: repeat($tablet-cols, 1fr);
+	}
+
+	@include respond-to("md") {
+		grid-template-columns: repeat($desktop-cols, 1fr);
+	}
+}
+
+// Aspect ratio mixin (useful for responsive images/videos)
+@mixin aspect-ratio($width, $height) {
+	position: relative;
+
+	&::before {
+		content: "";
+		display: block;
+		padding-top: ($height / $width) * 100%;
+	}
+
+	> * {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+// Visually hidden mixin (for accessibility)
+@mixin visually-hidden {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
+}
+
+// Focus styles mixin
+@mixin focus-styles($color: $primary-color) {
+	outline: 2px solid $color;
+	outline-offset: 2px;
+}
+
+// Hover lift effect
+@mixin hover-lift($distance: 5px) {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+	&:hover {
+		transform: translateY(-#{$distance});
+		box-shadow: 0 #{$distance * 2} #{$distance * 4} rgba(0, 0, 0, 0.15);
+	}
+}
+
+// Examples of usage with the new mixins:
+
+/*
+.portfolio-grid {
+  @include responsive-grid(1, 2, 3, 2rem);
+}
+
+.card {
+  @include hover-lift(8px);
+}
+
+.hero-image {
+  @include aspect-ratio(16, 9);
+}
+
+.mobile-only {
+  @include respond-below('sm') {
+    display: block;
+  }
+  
+  @include respond-to('sm') {
+    display: none;
+  }
+}
+
+.tablet-only {
+  @include respond-between('sm', 'lg') {
+    display: block;
+  }
+}
+
+.visually-hidden-text {
+  @include visually-hidden;
+}
+
+button:focus {
+  @include focus-styles();
+}
+*/
+
+// Transition mixin
+// USAGE: @include transition(all 0.2s ease-in-out);
+@mixin transition($transition...) {
+	// defining prefixes so we can use them in mixins below
+	$prefixes: ("-webkit-", "");
+	@each $prefix in $prefixes {
+		#{$prefix}transition: $transition;
+	}
+}
