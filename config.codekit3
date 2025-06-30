@@ -17,6 +17,14 @@
       "oAP" : "\/404.php",
       "oF" : 0
     },
+    "\/acf-json\/group_686203ab555d0.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/acf-json\/group_686203ab555d0-min.json",
+      "oF" : 0,
+      "oO" : 1,
+      "oS" : 1
+    },
     "\/archive-portfolio.php" : {
       "cB" : 0,
       "ft" : 8192,
